@@ -22,13 +22,16 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
+
+            // 🚨 IMPORTANT: Railway uses this ONLY
             'url' => env('DATABASE_URL'),
 
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            // ❌ DO NOT RELY ON THESE (safe fallback only)
+            'host' => null,
+            'port' => null,
+            'database' => null,
+            'username' => null,
+            'password' => null,
 
             'charset' => 'utf8',
             'prefix' => '',
@@ -51,7 +54,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Redis (optional - safe to keep but not required)
+    | Redis (optional)
     |--------------------------------------------------------------------------
     */
 
@@ -61,7 +64,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel')).'-database-'),
+            'prefix' => Str::slug(env('APP_NAME', 'laravel')).'-database-',
         ],
 
         'default' => [
